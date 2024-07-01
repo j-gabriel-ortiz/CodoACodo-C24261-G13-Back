@@ -12,7 +12,16 @@
     </header>
     <main>
         <h2>Contenido General DB</h2>
-        {{ datos }}
+        <!-- {{ datos }} -->
+        {% for item in datos %}
+        <ul>
+            <li>ID: {{ item.id }}</li>
+            <li>Archivo Ima: {{ item.img_ropa.split('/')[-1] }}</li>
+            <li>Prenda: {{ item.nombre_ropa }}</li>
+            <li>Precio: {{ item.precio_ropa }}</li>
+            <li>Talles: {{ item.talles }}</li>
+        </ul>    
+        {% endfor %}
     </main>
 </body>
 </html>

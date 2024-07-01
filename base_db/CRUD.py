@@ -19,7 +19,7 @@ class CRUD:
     # Leer
     @classmethod
     def obtener(cls):
-        consulta = f"SELECT * FROM {cls.tabla}"
+        consulta = f"SELECT * FROM {cls.tabla};"
         return cls.__conectar(consulta)
     
     # Modificar

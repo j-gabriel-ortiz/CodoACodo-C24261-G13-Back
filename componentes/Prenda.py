@@ -10,5 +10,6 @@ class Prenda(CRUD):
         'precio_ropa'
     )
     conexion = con
+
     def __init__(self, valores):
         super().crear(valores)
