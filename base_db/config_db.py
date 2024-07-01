@@ -6,4 +6,11 @@ config_dev = {
     'host':'127.0.0.1',
     'database':'db_ropa'
 }
+
+config_prod = {
+    'user':'GabrielJO',
+    'password':'C24261-G13',
+    'host':'GabrielJO.mysql.pythonanywhere-services.com',
+    'database':'GabrielJO$db_ropa'
+}
 conexion = mysql.connector.connect(**config_dev)
