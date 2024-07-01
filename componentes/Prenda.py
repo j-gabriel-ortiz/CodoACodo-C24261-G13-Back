@@ -5,6 +5,7 @@ class Prenda(CRUD):
     #Atributos de clase
     tabla = 'detalles_ropa'
     campos = (
+        'id_ropa',
         'img_ropa', 
         'nombre_ropa',
         'precio_ropa'

@@ -13,15 +13,29 @@
     <main>
         <h2>Contenido General DB</h2>
         <!-- {{ datos }} -->
-        {% for item in datos %}
-        <ul>
-            <li>ID: {{ item.id }}</li>
-            <li>Archivo Ima: {{ item.img_ropa.split('/')[-1] }}</li>
-            <li>Prenda: {{ item.nombre_ropa }}</li>
-            <li>Precio: {{ item.precio_ropa }}</li>
-            <li>Talles: {{ item.talles }}</li>
-        </ul>    
-        {% endfor %}
+          <table>
+            <tr>
+                <th>ID</th>
+                <th>Archivo Img</th>
+                <th>Prenda</th>
+                <th>Precio</th>
+                <th>Talles</th>
+                <th>Para</th>
+            </tr>
+            {% for item in datos %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.img.split('/')[-1] }}</td>
+                <td>{{ item.prenda }}</td>
+                <td>${{ item.precio }}</td>
+                <td>{{ item.talles }}</td>
+                <td>{{ item.genero }}</td>
+            </tr>    
+            {% endfor %}
+        </table>
+        <section>
+            <a href="/modificacion-db">Editar Registro</a>
+        </section>
     </main>
 </body>
 </html>

@@ -1,0 +1,64 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+header {
+    text-align: center;
+    padding: 10px 0;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+/* Diseño de inputs para buscar/mostrar */
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    width: 35%;
+    height: 400px;
+    padding: 20px;
+    gap: 20px;
+    background-color: #f0f0f0;
+}
+
+.campos p {
+    font-size: 1.7rem;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.campos label {
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.campos label input {
+    width: 75%;
+    font-size: 1.1rem;
+    padding: 0.1rem;
+    position: relative;
+    float: right;
+    border: none;
+    box-shadow: 1px 1px 2px black;
+}
+
+/* Diseño de botones para CRUD */
+.btn_crud {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_crud button {
+    width: 25%;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 1px 1px 4px 1px black;
+    padding: 2px 0px;
+}

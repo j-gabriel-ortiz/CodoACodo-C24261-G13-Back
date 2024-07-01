@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./modificacion-db.css') }}">
+    <title>Modificaciones DB</title>
+</head>
+<body>
+    <header>
+        <h1>Panel CRUD DB</h1>
+    </header>
+    <main>
+        <section class="campos">
+            <p>Buscar / Modificar / Eliminar</p>
+            <label>Buscar <input type="search" id="buscar" name="buscar"></label>
+            <label>ID <input type="number" id="id_db" name="id_db" readonly></label>
+            <label>Nombre <input type="text" id="nombre_db" name="nombre_db"></label>
+            <label>Imagen <input type="text" id="img_db" name="img_db"></label>
+            <label>Talles <input type="text" id="talles_db" name="talles_db"></label>
+            <label>Genero <input type="text" id="genero_db" name="genero_db"></label>
+            <label>Precio <input type="number" id="precio_db" name="precio_db"></label>
+            <div class="btn_crud">
+                <button>Buscar</button>
+                <button>Modificar</button>
+                <button>Eliminar</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
