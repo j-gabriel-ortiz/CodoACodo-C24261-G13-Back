@@ -9,7 +9,7 @@ config_dev = {
 
 config_prod = {
     'user':'GabrielJO',
-    'password':'C24261-G13',
+    'password':'olimpo123',
     'host':'GabrielJO.mysql.pythonanywhere-services.com',
     'database':'GabrielJO$db_ropa'
 }

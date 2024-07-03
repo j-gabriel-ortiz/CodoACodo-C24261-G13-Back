@@ -37,11 +37,33 @@ table {
 th,
 td {
     text-align: left;
-    padding: 8px;
+    padding: 6px;
 }
 
 tr:nth-child(even) {
     background-color: #d6eeee;
+}
+
+tr:nth-child(odd) {
+    background-color: #c4dabb;
+}
+
+tr button {
+    font-family: 'Times New Roman';
+    font-size: 17px;
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: lightgreen;
+}
+tr a {
+    font-size: 17px;
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+    background-color: #f40101;
+    text-decoration: none;
+    color: white;
 }
 
 /* Diseño de Link */
@@ -65,7 +87,7 @@ section a:hover {
     background-color: rgb(0, 0, 200);
 }
 
-/* Diseño de inputs para buscar/mostrar */
+/* Diseño de inputs para crear */
 
 .campos {
     display: flex;
@@ -107,6 +129,13 @@ section a:hover {
     float: right;
     border: none;
     box-shadow: 1px 1px 2px black;
+}
+
+.campos button {
+    font-family: "Times New Roman";
+    max-width: 200px;
+    font-size: 1.3rem;
+    border-radius: 13px;
 }
 
 /* Modal */
@@ -154,13 +183,19 @@ section a:hover {
     text-align: center;
 }
 
+.modal-content button {
+    font-size: 1.1rem;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+}
+
 .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     font-size: 20px;
     color: black;
     cursor: pointer;
+    position: relative;
+    left: 100%;
 }
 
 /* Responsive */
@@ -168,4 +203,10 @@ section a:hover {
     .modal-content {
         max-width: 90%;
     }
+}
+
+/* Footer */
+
+footer {
+    height: 10vh;
 }

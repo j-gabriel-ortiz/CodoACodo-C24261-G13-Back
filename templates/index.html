@@ -20,6 +20,8 @@
                 <th>Precio</th>
                 <th>Talles</th>
                 <th>Para</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
             {% for item in datos %}
             <tr>
@@ -35,8 +37,7 @@
 
             <div class="modal" id="modal-editar-{{ item.id }}">
                 <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Editar Prenda</h3>
+                    <h3>Editar Prenda <span class="close">&times;</span></h3>
                     <form action="/editarPrenda" method="post">
                         <label>ID: <input name="modal-id_db" id="modal-id_db" type="text" value="{{ item.id }}"></label>
                         <label>Nombre<input name="modal-nombre_db" id="modal-nombre_db" type="text" value="{{ item.prenda }}"></label>
@@ -62,6 +63,7 @@
             </form>
         </section>
     </main>
+    <footer></footer>
 
     <script>
         // Función para mostrar el modal
