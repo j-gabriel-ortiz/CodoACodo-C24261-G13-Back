@@ -23,7 +23,7 @@ def addPrenda():
     try:
         cursor = conexion.cursor()
     except Exception as e:
-        conexion = con
+        conexion.connect()
         cursor = conexion.cursor()
     
     #Insertar en detalles ropa
@@ -66,7 +66,7 @@ def deletePrenda(id):
     try:
         cursor = conexion.cursor()
     except Exception as e:
-        conexion = con
+        conexion.connect()
         cursor = conexion.cursor()
 
     tablas = ("detalles_talles","detalles_tipo","detalles_ropa")
@@ -94,7 +94,7 @@ def editarPrenda():
     try:
         cursor = conexion.cursor()
     except Exception as e:
-        conexion = con
+        conexion.connect()
         cursor = conexion.cursor()
     tablas = ("detalles_ropa", "detalles_talles", "detalles_tipo")
 
@@ -102,6 +102,8 @@ def editarPrenda():
         if tabla == "detalles_ropa":
             consulta = f"UPDATE detalles_ropa SET img_ropa = %s, nombre_ropa = %s, precio_ropa = %s WHERE id_ropa = %s;"
             valores = (imagen,nombre,precio,id)
+            cursor.execute(consulta, valores)
+            conexion.commit()
         elif tabla == "detalles_talles":
             consulta_borrar = f"DELETE FROM detalles_talles WHERE id_ropa = %s;"
             valores = (id,)

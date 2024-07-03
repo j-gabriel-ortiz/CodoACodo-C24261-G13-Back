@@ -1,12 +1,13 @@
-from base_db.config_db import conexion
+from base_db.config_db import conexion as con
 
 def obtener_datos():
-    con = conexion
+    conexion = con
     try:
-        cursor = con.cursor(dictionary=True)
+        cursor = conexion.cursor(dictionary=True)
     except Exception as e:
-        con = conexion
-        cursor = con.cursor(dictionary=True)
+        conexion.connect()
+        cursor = conexion.cursor(dictionary=True)
+        
     consulta = """
     SELECT detalles_ropa.id_ropa AS id, detalles_ropa.nombre_ropa AS prenda,
             detalles_ropa.img_ropa AS img, detalles_ropa.precio_ropa AS precio,

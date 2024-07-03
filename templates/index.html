@@ -38,7 +38,7 @@
             <div class="modal" id="modal-editar-{{ item.id }}">
                 <div class="modal-content">
                     <h3>Editar Prenda <span class="close">&times;</span></h3>
-                    <form action="/editarPrenda" method="post">
+                    <form action="/editarPrenda" method="POST">
                         <label>ID: <input name="modal-id_db" id="modal-id_db" type="text" value="{{ item.id }}"></label>
                         <label>Nombre<input name="modal-nombre_db" id="modal-nombre_db" type="text" value="{{ item.prenda }}"></label>
                         <label>Img: <input name="modal-img_db" id="modal-img_db" type="text" value="{{ item.img }}"></label>

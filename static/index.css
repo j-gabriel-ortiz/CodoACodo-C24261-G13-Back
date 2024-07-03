@@ -133,9 +133,10 @@ section a:hover {
 
 .campos button {
     font-family: "Times New Roman";
-    max-width: 200px;
+    width: 200px;
     font-size: 1.3rem;
     border-radius: 13px;
+    align-self: center;
 }
 
 /* Modal */
@@ -188,6 +189,7 @@ section a:hover {
     background-color: #f0f0f0;
     border: none;
     border-radius: 5px;
+    padding: 2px 10px;
 }
 
 .close {
