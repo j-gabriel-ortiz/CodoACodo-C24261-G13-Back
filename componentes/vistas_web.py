@@ -7,8 +7,19 @@ from auxiliares.funciones import genero_ropa_editar, talles_consulta, genero_rop
 
 @app.route('/')
 def inicio():
-    datos = obtener_datos()
-    return render_template('./index.html', datos=datos)
+    datos = obtener_datos()  
+    talles_ordenados = ordenar_talles(datos) 
+    return render_template('./index.html', datos=datos, talles_ordenados=talles_ordenados)
+
+def ordenar_talles(datos):
+    orden_talles = {'xs': 1, 's': 2, 'm': 3, 'l': 4, 'xl': 5, 'xxl': 6}
+
+    def ordenar_talles_item(item):
+        talles_lista = item['talles'].split(',')
+        talles_ordenados = sorted(talles_lista, key=lambda talle: orden_talles.get(talle, float('inf')))
+        return ', '.join(talles_ordenados)
+
+    return [ordenar_talles_item(item) for item in datos]
 
 ######### Funcion Agregar #########
 @app.route('/add-prenda', methods=["POST"])

@@ -34,19 +34,24 @@ table {
     width: 80%;
 }
 
+thead {
+    background-color: #e0e0e0;
+}
+
+tbody:nth-child(even) {
+    background-color: #d6eeee;
+}
+
+tbody:nth-child(odd) {
+    background-color: #c4dabb;
+}
+
 th,
 td {
     text-align: left;
     padding: 6px;
 }
 
-tr:nth-child(even) {
-    background-color: #d6eeee;
-}
-
-tr:nth-child(odd) {
-    background-color: #c4dabb;
-}
 
 tr button {
     font-family: 'Times New Roman';
@@ -85,58 +90,6 @@ section a {
 section a:hover {
     color: white;
     background-color: rgb(0, 0, 200);
-}
-
-/* Diseño de inputs para crear */
-
-.campos {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    width: 35%;
-    height: 400px;
-    padding: 20px;
-    gap: 20px;
-    background-color: #f0f0f0;
-}
-
-.campos p {
-    font-size: 1.7rem;
-    font-weight: bolder;
-    text-decoration: underline;
-}
-
-.campos form {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.campos label {
-    font-size: 1.3rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.campos label input {
-    width: 75%;
-    font-size: 1.1rem;
-    padding: 0.1rem;
-    position: relative;
-    float: right;
-    border: none;
-    box-shadow: 1px 1px 2px black;
-}
-
-.campos button {
-    font-family: "Times New Roman";
-    width: 200px;
-    font-size: 1.3rem;
-    border-radius: 13px;
-    align-self: center;
 }
 
 /* Modal */
@@ -184,6 +137,20 @@ section a:hover {
     text-align: center;
 }
 
+#check-talles {
+    width: 80%;
+    box-sizing: border-box;
+    padding: 3px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#check-talles label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .modal-content button {
     font-size: 1.1rem;
     background-color: #f0f0f0;
@@ -198,6 +165,78 @@ section a:hover {
     cursor: pointer;
     position: relative;
     left: 100%;
+}
+
+/* Diseño de inputs para crear */
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    border-radius: 30px;
+    width: 40%;
+    min-width: 350px;
+    height: 350px;
+    padding: 20px;
+    gap: 20px;
+    background-color: #f0f0f0;
+}
+
+.campos p {
+    font-size: 1.7rem;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.campos form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.campos label {
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.campos label input {
+    width: 75%;
+    font-size: 1.1rem;
+    padding: 0.1rem;
+    position: relative;
+    float: right;
+    border: none;
+    box-shadow: 1px 1px 2px black;
+}
+
+#talles_db {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-around;
+}
+
+#talles_db legend {
+    text-align: left;
+}
+
+#talles_db input {
+    box-shadow: none;
+    margin-left: 5px;
+    width: 1rem;
+}
+
+.campos button {
+    font-family: "Times New Roman";
+    width: 200px;
+    font-size: 1.3rem;
+    border-radius: 13px;
+    align-self: center;
 }
 
 /* Responsive */

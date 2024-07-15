@@ -23,3 +23,18 @@ def obtener_datos():
     datos = cursor.fetchall()
     con.close()
     return datos
+
+
+def obtener_img_exp():
+    conexion = con
+    try:
+        cursor = conexion.cursor(dictionary=True)
+    except Exception as e:
+        conexion.connect()
+        cursor = conexion.cursor(dictionary=True)
+        
+    consulta = "SELECT * FROM img_exposicion_ropa;"
+    cursor.execute(consulta)
+    datos = cursor.fetchall()
+    con.close()
+    return datos
