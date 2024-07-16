@@ -1,0 +1,40 @@
+{% extends './layout.html' %}
+
+<!-- Custom CSS -->
+{% block css %}{% endblock %}
+
+<!-- header -->
+{% block header %}
+{% endblock %}
+
+<!-- main -->
+{% block main %}
+    <div>
+        <h2>Sing In</h2>
+        <form action="/login" method="post">
+            <label>Usuario <input type="text" name="user" placeholder="usuario"></label>
+            <label>password <input type="password" name="password" placeholder="password"></label>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+    <div>
+        <p>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <br>
+                    {% for message in  messages%}
+                        <p><strong>{{ message }}</strong></p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </p>
+    </div>
+{% endblock %}
+
+<!-- footer -->
+{% block footer %}
+{% endblock %}
+
+<!-- script -->
+{% block script %}
+{% endblock %}

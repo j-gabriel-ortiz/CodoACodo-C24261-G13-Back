@@ -1,17 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background: radial-gradient(circle, rgba(238,228,174,1) 0%, rgba(148,187,233,1) 100%);
-}
-
-header {
-    text-align: center;
-    margin: 15px;
-}
-
 main {
     display: flex;
     align-items: center;
@@ -19,6 +5,39 @@ main {
     flex-direction: column;
     gap: 5px;
     font-size: 18px;
+}
+
+/* Diseño de nav */
+
+header {
+    position: relative;
+}
+
+nav {
+    background-color: black;
+    position: sticky;
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-right: 15px;
+    gap: 15px;
+}
+
+nav li {
+    list-style: none;
+    font-size: 1.3rem;
+    color: white;
+    padding: 10px 5px;
+}
+
+nav li a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: white;
 }
 
 h2 {
@@ -29,13 +48,22 @@ h2 {
 
 /* Diseño de la tabla con datos generales */
 
-table {
-    border-collapse: collapse;
+#tabla-completa {
     width: 80%;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+table {
+    position: relative;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 thead {
     background-color: #e0e0e0;
+    position: sticky;
+    top: 0;
 }
 
 tbody:nth-child(even) {
@@ -244,10 +272,4 @@ section a:hover {
     .modal-content {
         max-width: 90%;
     }
-}
-
-/* Footer */
-
-footer {
-    height: 10vh;
 }

@@ -1,15 +1,60 @@
-from flask import render_template, request, redirect, url_for
+from flask import flash, render_template, request, redirect, url_for
+from flask_login import LoginManager, login_user, logout_user, login_required
+from werkzeug.security import check_password_hash
 from base_db.datos import obtener_datos
 from main import app
-from base_db.config_db import conexion as con
+from base_db.config_db import conexion as con, conexion_user as con_user
 from auxiliares.funciones import genero_ropa_editar, talles_consulta, genero_ropa_consulta
+from .ModelUser import ModelUserDB
+from .User import UserDB
 
+login_manager_app = LoginManager(app)
+
+@login_manager_app.user_loader
+def load_user(id_user):
+    conexion = con_user
+    return ModelUserDB.get_by_id(conexion, id_user)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/')
 def inicio():
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Datos ingresados
+        user_log = request.form['user']
+        clave = request.form['password']
+
+        # Conexion a db
+        conexion = con_user
+
+        user_db = UserDB(0, user_log, clave)
+        logged_user = ModelUserDB.login(conexion, user_db)
+        if logged_user != None:
+            if check_password_hash(logged_user.password, user_db.password):
+                login_user(logged_user)
+                return redirect(url_for('dashboard'))
+            else:
+                flash('Clave invalida...')
+                return render_template('./login.html')
+        else:
+            flash('Usuario invalido...')
+            return render_template('./login.html')
+    else:
+        return render_template('./login.html')
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
     datos = obtener_datos()  
     talles_ordenados = ordenar_talles(datos) 
-    return render_template('./index.html', datos=datos, talles_ordenados=talles_ordenados)
+    return render_template('./dashboard.html', datos=datos, talles_ordenados=talles_ordenados)
 
 def ordenar_talles(datos):
     orden_talles = {'xs': 1, 's': 2, 'm': 3, 'l': 4, 'xl': 5, 'xxl': 6}
@@ -68,7 +113,7 @@ def addPrenda():
         conexion.commit()
 
     cursor.close()
-    return redirect(url_for('inicio'))
+    return redirect(url_for('dashboard'))
 
 ######### Funcion Eliminar #########
 @app.route('/deletePrenda/<string:id>')
@@ -89,7 +134,7 @@ def deletePrenda(id):
         conexion.commit()
     
     cursor.close()
-    return redirect(url_for('inicio'))
+    return redirect(url_for('dashboard'))
 
 ######### Funcion Editar #########
 @app.route('/editarPrenda', methods=["POST"])
@@ -136,4 +181,13 @@ def editarPrenda():
                 conexion.commit()
     
     cursor.close()
-    return redirect(url_for('inicio'))
+    return redirect(url_for('dashboard'))
+
+def status_404(error):
+    return '<h1>Pagina no encontrada</h1>', 404
+
+def status_401(error):
+    return redirect(url_for('login'))
+
+app.register_error_handler(401, status_401)
+app.register_error_handler(404, status_404)
