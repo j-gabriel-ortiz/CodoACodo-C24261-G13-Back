@@ -1,7 +1,9 @@
 {% extends './layout.html' %}
 
 <!-- Custom CSS -->
-{% block css %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='./login.css') }}">
+{% endblock %}
 
 <!-- header -->
 {% block header %}
@@ -9,11 +11,11 @@
 
 <!-- main -->
 {% block main %}
-    <div>
+    <div id="sing-in">
         <h2>Sing In</h2>
-        <form action="/login" method="post">
+        <form action="/login" method="post" id="form-ingreso">
             <label>Usuario <input type="text" name="user" placeholder="usuario"></label>
-            <label>password <input type="password" name="password" placeholder="password"></label>
+            <label>Password <input type="password" name="password" placeholder="password"></label>
             <button type="submit">Ingresar</button>
         </form>
     </div>

@@ -40,6 +40,26 @@ nav li a {
     color: white;
 }
 
+#menu-api {
+    display: none;
+}
+
+#menu-api li {
+    width: 150px;
+}
+
+#menu-api li a {
+    font-size: 1rem;
+}
+
+.api:hover #menu-api {
+    display: block;
+    position: absolute;
+    right: 20px;
+    background-color: black;
+    font-size: 1rem;
+}
+
 h2 {
     width: 80%;
     text-align: center;
@@ -204,11 +224,11 @@ section a:hover {
     justify-content: center;
     border-radius: 30px;
     width: 40%;
-    min-width: 350px;
+    min-width: 380px;
     height: 350px;
     padding: 20px;
     gap: 20px;
-    background-color: #f0f0f0;
+    background-color: rgba(240, 240, 240, 0.4);
 }
 
 .campos p {

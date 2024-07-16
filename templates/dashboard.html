@@ -10,7 +10,13 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="#"></a>API</li>
+            <li class="api">
+                API
+                <ul id="menu-api">
+                    <li><a href="{{ url_for('mostrar_datos') }}" target="_blank">API de Ropa Teinda</a></li>
+                    <li><a href="{{ url_for('exposicion') }}" target="_blank">API de Ropa Expo</a></li>
+                </ul>
+            </li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
     </nav>
