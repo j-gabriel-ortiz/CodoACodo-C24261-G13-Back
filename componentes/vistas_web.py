@@ -2,7 +2,7 @@ from flask import flash, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import check_password_hash
 from base_db.datos import obtener_datos
-from main import app
+from app import app
 from base_db.config_db import conexion as con, conexion_user as con_user
 from auxiliares.funciones import genero_ropa_editar, talles_consulta, genero_ropa_consulta
 from .ModelUser import ModelUserDB
@@ -71,7 +71,7 @@ def ordenar_talles(datos):
 def addPrenda():
     nombre = request.form.get('nombre_db')
     imagen = request.form.get('img_db')
-    talles = request.form.get('talles_db')
+    talles = request.form.getlist('talles_db')
     genero = request.form.get('genero_db')
     precio = request.form.get('precio_db')
 
@@ -83,33 +83,35 @@ def addPrenda():
         cursor = conexion.cursor()
     
     #Insertar en detalles ropa
-    consulta = f"INSERT INTO detalles_ropa (img_ropa, nombre_ropa, precio_ropa) VALUES (%s, %s, %s);"
-    valores = (imagen, nombre, precio)
+    cursor.execute("SELECT MAX(id_ropa) FROM detalles_ropa")
+    max_id_prenda = int(cursor.fetchone()[0]) + 1
+    
+    consulta = f"INSERT INTO detalles_ropa VALUES (%s, %s, %s, %s);"
+    valores = (max_id_prenda, imagen, nombre, precio)
     cursor.execute(consulta, valores)
     conexion.commit()
 
-    #Busca id recien creado
-    consulta_id = f"SELECT * FROM detalles_ropa WHERE nombre_ropa = %s;"
-    nombre_ropa = (nombre,)
-    cursor.execute(consulta_id, nombre_ropa)
-    dato_id = cursor.fetchall()
+    #Insertar en talles
+    cursor.execute("SELECT MAX(id_detalles_talles) FROM detalles_talles")
+    max_id_talle = int(cursor.fetchone()[0]) + 1
     
-    #id prenda
-    new_id = dato_id[0][0]
-  
-    #Datos para la consulta, la funcion genera una tupla con tuplas con el id y talle (por cada talle)
-    talles_lista = talles.split(',')
-    valores_talles = talles_consulta(talles_lista, new_id)
-    consulta_talles = f"INSERT INTO detalles_talles (id_ropa, id_talles) VALUES (%s, %s);"
+    # La funcion genera una lista con tuplas que contienen id, talle y si tiene ese talle o no
+    valores_talles = talles_consulta(talles, max_id_prenda)
+    consulta_talles = f"INSERT INTO detalles_talles VALUES (%s, %s, %s, %s);"
     for i in valores_talles:
-        cursor.execute(consulta_talles, i)
+        max_id_talle = max_id_talle + 1
+        cursor.execute(consulta_talles, (max_id_talle, i[0],i[1],i[2]))
         conexion.commit()
 
+    #Insertar en tipo
+    cursor.execute("SELECT MAX(id_detalles_tipo) FROM detalles_tipo")
+    max_id_tipo = int(cursor.fetchone()[0]) + 1
+    
     genero_lista = genero.split(',')
-    valores_genero = genero_ropa_consulta(genero_lista, new_id)
-    consulta_genero = f"INSERT INTO detalles_tipo (id_ropa, id_tipo) VALUES (%s, %s);"
+    valores_genero = genero_ropa_consulta(genero_lista, max_id_prenda)
+    consulta_genero = f"INSERT INTO detalles_tipo VALUES (%s, %s, %s);"
     for i in valores_genero:
-        cursor.execute(consulta_genero, i)
+        cursor.execute(consulta_genero, (max_id_tipo, i[0], i[1]))
         conexion.commit()
 
     cursor.close()
@@ -143,7 +145,7 @@ def editarPrenda():
     nombre = request.form.get('modal-nombre_db')
     imagen = request.form.get('modal-img_db')
     precio = request.form.get('modal-precio_db')
-    talles = request.form.get('modal-talles')
+    talles = request.form.getlist('modal-talles')
     generos = request.form.get('modal-generos')
 
     conexion = con
@@ -152,6 +154,11 @@ def editarPrenda():
     except Exception as e:
         conexion.connect()
         cursor = conexion.cursor()
+
+    valores_talles = talles_consulta(talles, id)
+
+    print(valores_talles)
+
     tablas = ("detalles_ropa", "detalles_talles", "detalles_tipo")
 
     for tabla in tablas:
@@ -160,24 +167,20 @@ def editarPrenda():
             valores = (imagen,nombre,precio,id)
             cursor.execute(consulta, valores)
             conexion.commit()
-        elif tabla == "detalles_talles":
-            consulta_borrar = f"DELETE FROM detalles_talles WHERE id_ropa = %s;"
-            valores = (id,)
-            cursor.execute(consulta_borrar, valores)
-            conexion.commit()
 
-            talles_lista = talles.split(',')
-            valores_talles = talles_consulta(talles_lista, id)
-            consulta_talles = f"INSERT INTO detalles_talles (id_ropa, id_talles) VALUES (%s, %s);"
+        elif tabla == "detalles_talles":
+            consulta = f"UPDATE detalles_talles SET validacion_talle = %s WHERE id_ropa = %s AND id_talles = %s;"
+            valores_talles = talles_consulta(talles, id)
             for i in valores_talles:
-                cursor.execute(consulta_talles, i)
+                cursor.execute(consulta, (i[2],i[0],i[1]))
                 conexion.commit()
+
         elif tabla == "detalles_tipo":
             genero_lista = generos.split(',')
             valores_genero = genero_ropa_editar(genero_lista, id)
-            consulta = f"UPDATE detalles_tipo SET id_tipo = %s WHERE id_ropa = %s;"
+            consulta_talles = f"UPDATE detalles_tipo SET id_tipo = %s WHERE id_ropa = %s;"
             for i in valores_genero:
-                cursor.execute(consulta, i)
+                cursor.execute(consulta_talles, i)
                 conexion.commit()
     
     cursor.close()

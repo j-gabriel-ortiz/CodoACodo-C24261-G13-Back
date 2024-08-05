@@ -13,7 +13,7 @@
             <li class="api">
                 API
                 <ul id="menu-api">
-                    <li><a href="{{ url_for('mostrar_datos') }}" target="_blank">API de Ropa Teinda</a></li>
+                    <li><a href="{{ url_for('mostrar_datos') }}" target="_blank">API de Ropa Tienda</a></li>
                     <li><a href="{{ url_for('exposicion') }}" target="_blank">API de Ropa Expo</a></li>
                 </ul>
             </li>
@@ -71,7 +71,7 @@
                         <label>XL<input type="checkbox" name="modal-talles" value="xl" {% if 'xl' in item.talles %}checked{% endif %}></label>
                         <label>XXL<input type="checkbox" name="modal-talles" value="xxl" {% if 'xxl' in item.talles %}checked{% endif %}></label>
                     </fieldset>
-                    <label>Genero: <input name="modal-generos" id="modal-generos" type="text" value="{{ item.genero }}"></label>
+                    <label>Genero: <input name="modal-generos" id="modal-generos" type="text" value="{{ item.ropa_para }}"></label>
                     <button type="submit">Guardar cambios</button>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-from main import app
+from app import app
 from flask import jsonify
 from base_db.datos import obtener_datos, obtener_img_exp
 
