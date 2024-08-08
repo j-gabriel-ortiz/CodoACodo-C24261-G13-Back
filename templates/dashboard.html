@@ -35,7 +35,7 @@
                 <th>Prenda</th>
                 <th>Precio</th>
                 <th>Talles</th>
-                <th>Género</th>
+                <th>Tipo</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -48,7 +48,7 @@
             <td>{{ item.prenda }}</td>
             <td>${{ item.precio }}</td>
             <td>{{ talles_ordenados[loop.index0] }}</td>
-            <td>{{ item.genero }}</td>
+            <td>{{ item.ropa_para }}</td>
             <td><button id="btn-editar-{{ item.id }}">Editar</button></td>
             <td><a href="{{ url_for('deletePrenda', id=item.id) }}">Eliminar</a></td>
         </tr>
@@ -93,7 +93,7 @@
                 <label>XL<input type="checkbox" name="talles_db" value="xl"></label>
                 <label>XXL<input type="checkbox" name="talles_db" value="xxl"></label>
             </fieldset>
-            <label>Genero <input type="text" id="genero_db" name="genero_db" required></label>
+            <label>Tipo <input type="text" id="genero_db" name="genero_db" required></label>
             <label>Precio <input type="number" id="precio_db" name="precio_db" required></label>
             <button type="submit" id="btn-crear">Crear</button>
         </form>

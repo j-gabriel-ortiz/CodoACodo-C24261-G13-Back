@@ -3,15 +3,10 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 5px;
     font-size: 18px;
 }
 
 /* Diseño de nav */
-
-header {
-    position: relative;
-}
 
 nav {
     background-color: black;
@@ -81,17 +76,27 @@ table {
 }
 
 thead {
-    background-color: #e0e0e0;
+    background-color: #000000;
     position: sticky;
     top: 0;
+    color: white;
+}
+
+th {
+    box-sizing: border-box;
+    border-right: 1px solid white;
+}
+
+tbody {
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
 }
 
 tbody:nth-child(even) {
-    background-color: #d6eeee;
+    background-color: white;
 }
 
 tbody:nth-child(odd) {
-    background-color: #c4dabb;
+    background-color: rgba(255, 255, 255, 0.4);  
 }
 
 th,
@@ -228,13 +233,13 @@ section a:hover {
     height: 350px;
     padding: 20px;
     gap: 20px;
-    background-color: rgba(240, 240, 240, 0.4);
+    background-color: rgb(255 255 255);
+    box-shadow: 0 0 1px black;
 }
 
 .campos p {
     font-size: 1.7rem;
     font-weight: bolder;
-    text-decoration: underline;
 }
 
 .campos form {
@@ -258,7 +263,7 @@ section a:hover {
     position: relative;
     float: right;
     border: none;
-    box-shadow: 1px 1px 2px black;
+    border-bottom: 2px solid rgba(0, 0, 0, .3);
 }
 
 #talles_db {
@@ -285,6 +290,7 @@ section a:hover {
     font-size: 1.3rem;
     border-radius: 13px;
     align-self: center;
+    border: 1px solid rgba(0, 0, 0, .5);
 }
 
 /* Responsive */
